@@ -2,6 +2,8 @@ package com.hikmatullo.cashing.controller;
 
 import com.hikmatullo.cashing.entity.Student;
 import com.hikmatullo.cashing.service.StudentService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,5 +31,13 @@ public class StudentController {
     @PutMapping("/{id}")
     public Student updateStudent(@PathVariable Integer id, @RequestBody Student student) {
         return studentService.update(id, student);
+    }
+
+
+    @PostMapping("/cookie")
+    public String getCookie(HttpServletResponse response) {
+        Cookie cookie = new Cookie("sample_example", "message_from_controller");
+        response.addCookie(cookie);
+        return "Cookie";
     }
 }
